@@ -1,0 +1,3 @@
+rootProject.name = 'PomoTrello'
+
+include ':app'

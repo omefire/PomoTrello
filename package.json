@@ -1,6 +1,10 @@
 {
 	"name": "PomoTrello",
 	"version": "0.0.1",
+	"author": {
+		"name": "Omar Mefire",
+		"email": "omefire@gmail.con"
+	},
 	"private": true,
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",

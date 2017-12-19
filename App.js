@@ -9,6 +9,16 @@ import HomeScreen from './Home';
 import LoginScreen from './Login';
 
 export default App =  StackNavigator({
-    Home: { screen: HomeScreen },
-    Login: { screen: LoginScreen }
+    Home: { 
+            screen: HomeScreen,
+            navigationOptions: {
+                headerLeft: null,
+            }
+    },
+    Login: { 
+        screen: LoginScreen ,
+        navigationOptions: {
+            headerLeft: null,
+        }
+    }
 });

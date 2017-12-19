@@ -12,13 +12,16 @@ export default App =  StackNavigator({
     Home: { 
             screen: HomeScreen,
             navigationOptions: {
-                headerLeft: null,
+                header: null,
             }
     },
     Login: { 
-        screen: LoginScreen ,
+        screen: LoginScreen,
         navigationOptions: {
-            headerLeft: null,
+            header: null,
         }
-    }
+    }, 
+},
+{
+    initialRouteName: 'Home',
 });

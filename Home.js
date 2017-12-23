@@ -4,11 +4,12 @@ import { NavigationActions } from 'react-navigation';
 import { Platform, StyleSheet, Text, View, Image, Button, TouchableHighlight } from 'react-native';
 
 export default class HomeScreen extends React.Component {
-    goToLogin() {
+    // ToDO: Extract this into a `Utils` module
+    navigateToRoute(routeName) {
         const resetAction = NavigationActions.reset({
             index: 0,
             actions: [
-                NavigationActions.navigate({ routeName: 'Login' }),
+                NavigationActions.navigate({ routeName: routeName }),
             ],
         });
         this.props.navigation.dispatch(resetAction);
@@ -20,7 +21,7 @@ export default class HomeScreen extends React.Component {
                 <Text style={{ fontSize: 30, color: 'white' }}>Hello PomoTrello!</Text>
                 <Text style={{ fontSize: 15, color: 'white', margin: 15 }}>Ready to have your productivity skyrocket?</Text>
                 <Image source={require('./cat_pic.jpg')}></Image>
-                <TouchableHighlight onPress={() => this.goToLogin()}>
+                <TouchableHighlight onPress={() => this.navigateToRoute('Login')}>
                     <Text color="white" style={styles.loginButtonText}>Log Into Your Trello Account</Text>
                 </TouchableHighlight>
             </View>

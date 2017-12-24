@@ -1,19 +1,21 @@
 
 import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
-import { Platform, StyleSheet, Text, View, Image, Button, TouchableHighlight } from 'react-native';
+import {
+    Platform, StyleSheet, Text, View, Image, Button, TouchableHighlight,
+    Linking
+} from 'react-native';
+import { config } from './config';
 
 export default class HomeScreen extends React.Component {
-    // ToDO: Extract this into a `Utils` module
-    navigateToRoute(routeName) {
-        const resetAction = NavigationActions.reset({
-            index: 0,
-            actions: [
-                NavigationActions.navigate({ routeName: routeName }),
-            ],
-        });
-        this.props.navigation.dispatch(resetAction);
+
+    onLogin() {
+
+        // This will open up a browser instance that will direct the user through the Trello login process
+        const loginUri = `http://${config.host}/login`;
+        Linking.openURL(loginUri).catch(error => alert(JSON.stringify(error))); // ToDO: Handle error/failure case
     }
+
     render() {
         const { navigate } = this.props.navigation;
         return (
@@ -21,7 +23,7 @@ export default class HomeScreen extends React.Component {
                 <Text style={{ fontSize: 30, color: 'white' }}>Hello PomoTrello!</Text>
                 <Text style={{ fontSize: 15, color: 'white', margin: 15 }}>Ready to have your productivity skyrocket?</Text>
                 <Image source={require('./cat_pic.jpg')}></Image>
-                <TouchableHighlight onPress={() => this.navigateToRoute('Login')}>
+                <TouchableHighlight onPress={() => this.onLogin()}>
                     <Text color="white" style={styles.loginButtonText}>Log Into Your Trello Account</Text>
                 </TouchableHighlight>
             </View>

@@ -5,7 +5,7 @@ const express = require('express');
 const passport = require('passport');
 const expressSession = require('express-session');
 
-require('dotenv').config();
+require('dotenv').config({ path: '../.env' });
 
 const TrelloStrategy = require('passport-trello').Strategy;
 
@@ -58,11 +58,11 @@ passport.use(
             expiration: 'never'
         }
     },
-    (req, token, tokenSecret, profile, done) => {
-        let user = profile;
-        user.accessToken = token;
-        return done(null, user);
-    })
+        (req, token, tokenSecret, profile, done) => {
+            let user = profile;
+            user.accessToken = token;
+            return done(null, user);
+        })
 );
 
 // Note: https://stackoverflow.com/questions/27637609/understanding-passport-serialize-deserialize

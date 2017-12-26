@@ -3,17 +3,36 @@ import React, { Component } from 'react';
 import { NavigationActions } from 'react-navigation';
 import {
     Platform, StyleSheet, Text, View, Image, Button, TouchableHighlight,
-    Linking
+    Linking, Alert
 } from 'react-native';
-import { config } from './config';
+
+import Config from 'react-native-config';
 
 export default class HomeScreen extends React.Component {
 
-    onLogin() {
+    componentDidMount() {
+        Linking.getInitialURL().then((url) => {
+            if (url) {
+                console.log(`URL is: ${url}`);
+                const matches = url.match(/pomotrello:\/\/(.*)$/);
+                if (matches.length < 2) {
+                    throw new Error(`No authentication token available in this URI: ${url}`);
+                }
+                const trelloAuthenticationToken = matches[1];
+                Alert.alert(trelloAuthenticationToken);
+            } else {
+                console.log("No URL");
+            }
+        }).catch(err => console.error('An error occurred', err));
+    }
 
+    onLogin() {
         // This will open up a browser instance that will direct the user through the Trello login process
-        const loginUri = `http://${config.host}:${config.port}/login`;
-        Linking.openURL(loginUri).catch(error => alert(JSON.stringify(error))); // ToDO: Handle error/failure case
+        // ... and when it's finished, it will bounce back to `pomotrello://authenticationToken`,
+        // ... which we will extract. 
+        const scheme = (Config.NODE_ENV === 'production') ? 'https' : 'http';
+        const loginUri = `${scheme}://${Config.HOSTNAME}:${Config.PORT}/login`;
+        Linking.openURL(loginUri).catch(error => alert(JSON.stringify(error)));
     }
 
     render() {

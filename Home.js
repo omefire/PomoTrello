@@ -12,7 +12,7 @@ export default class HomeScreen extends React.Component {
     onLogin() {
 
         // This will open up a browser instance that will direct the user through the Trello login process
-        const loginUri = `http://${config.host}/login`;
+        const loginUri = `http://${config.host}:${config.port}/login`;
         Linking.openURL(loginUri).catch(error => alert(JSON.stringify(error))); // ToDO: Handle error/failure case
     }
 
